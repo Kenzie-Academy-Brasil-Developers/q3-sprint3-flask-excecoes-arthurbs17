@@ -1,7 +1,6 @@
 import os
 from json import JSONDecodeError, dump, load
 from dotenv import load_dotenv
-from itsdangerous import json
 
 load_dotenv()
 filename = os.environ['DATABASE_FILENAME']

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from http import HTTPStatus
 from app.exc.already_email import AlreadyEmail
+from app.exc.invalides_informations import InvalidsInformations
 from app.models.new_user_model import User
 
 app = Flask(__name__)
@@ -11,9 +12,11 @@ def get_database():
 
 @app.post("/user")
 def post_in_database():
-    user = User(**request.get_json())
-
     try:
+        user = User(**request.get_json())
         return user.post_user(), HTTPStatus.CREATED
+    except InvalidsInformations:
+        return {"message": "Tipos passados errados"}, HTTPStatus.BAD_REQUEST
+
     except AlreadyEmail:
         return {"message": "Email já cadastrado!"}, HTTPStatus.CONFLICT

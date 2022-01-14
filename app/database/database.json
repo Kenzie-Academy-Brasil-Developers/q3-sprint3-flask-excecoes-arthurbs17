@@ -3,5 +3,10 @@
     "email": "exemplo@mail.com",
     "nome": "Nome Do Usu\u00e1rio",
     "id": 1
+  },
+  {
+    "email": "exmplo@mail.com",
+    "nome": "Nome Do Usu\u00e1rio",
+    "id": 2
   }
 ]
