@@ -1,1 +1,7 @@
-[]
+[
+  {
+    "email": "exemplo@mail.com",
+    "nome": "Nome Do Usu\u00e1rio",
+    "id": 1
+  }
+]

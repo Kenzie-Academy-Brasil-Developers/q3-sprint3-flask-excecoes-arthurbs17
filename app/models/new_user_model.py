@@ -1,6 +1,7 @@
 from http import HTTPStatus
 from app.services.json_database import read_database_json, write_database_json
-import io
+from app.services.user_service import check_if_email_registred
+from app.exc.already_email import AlreadyEmail
 
 class User:
     
@@ -11,14 +12,13 @@ class User:
 
     def get_users():
         data = read_database_json()
+        empty_database_return = {"data": data}
         if len(data) == 0:
-            return {"data": data}
+            return empty_database_return
         return data
     
     def post_user(self):
         user = self.__dict__
-
-        try:
-            return write_database_json(user)
-        except (io.UnsupportedOperation, TypeError):
-            return write_database_json(user)
+        if check_if_email_registred(user["email"]):
+            raise AlreadyEmail
+        return write_database_json(user)
