@@ -13,14 +13,11 @@ def read_database_json():
     except (FileNotFoundError, JSONDecodeError):
         os.makedirs(filename, exist_ok=True)
         with open(filename  + 'database.json', "w") as json_database:
-            dump({"data":[]}, json_database, indent=2)
+            dump([], json_database)
             return []
 
 def write_database_json(new_user: dict):
-    try:
-        database_list = read_database_json()["data"]
-    except TypeError:
-        database_list = read_database_json()
+    database_list = read_database_json()
     database_list.append(new_user)
     with open(filename + "database.json", "w") as json_database:
         dump(database_list, json_database, indent=2)

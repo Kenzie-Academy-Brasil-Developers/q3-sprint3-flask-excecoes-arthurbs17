@@ -1,5 +1,4 @@
 from http import HTTPStatus
-from mailbox import NotEmptyError
 from app.services.json_database import read_database_json, write_database_json
 import io
 
@@ -11,13 +10,10 @@ class User:
         self.id = len(read_database_json()) + 1 
 
     def get_users():
-        try:
-            data = read_database_json()
-            if data == []:
-                return {"data": data}
-            return data
-        except io.UnsupportedOperation:
-            return read_database_json()
+        data = read_database_json()
+        if len(data) == 0:
+            return {"data": data}
+        return data
     
     def post_user(self):
         user = self.__dict__
