@@ -16,4 +16,4 @@ def post_in_database():
     try:
         return user.post_user(), HTTPStatus.CREATED
     except AlreadyEmail:
-        return {"message": "Email já cadastrado!"}
+        return {"message": "Email já cadastrado!"}, HTTPStatus.CONFLICT
